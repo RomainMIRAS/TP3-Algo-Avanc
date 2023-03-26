@@ -10,6 +10,8 @@
 #include <limits.h>
 
 #include "graphe.h"
+#include "pile.h"
+#include "file.h"
 
 
 psommet_t chercher_sommet (pgraphe_t g, int label)
