@@ -271,6 +271,7 @@ void relachement(psommet_t u, psommet_t v, int poids)
   if (v->distance > u->distance + poids)
   {
     v->distance = u->distance + poids;
+    v->pere = u;
   }
   return;
 }
@@ -283,6 +284,7 @@ void init_sommet(pgraphe_t g)
   {
     p->couleur = 0;        // couleur indefinie
     p->distance = INT_MAX; // INFINI
+    p->pere = NULL;
     p = p->sommet_suivant; // passer au sommet suivant dans le graphe
   }
 
@@ -294,7 +296,7 @@ void algo_dijkstra(pgraphe_t g, int r)
   init_sommet(g);
 
   pfile_t file = creer_file();
-  psommet_t p = g;
+  psommet_t p = chercher_sommet(g, r);
   parc_t a = p->liste_arcs;
 
   enfiler(file, p);
@@ -305,9 +307,6 @@ void algo_dijkstra(pgraphe_t g, int r)
   while (!file_vide(file))
   {
     p = defiler(file);
-
-    printf(" %d ", p->label);
-
     a = p->liste_arcs;
     while (a != NULL)
     {
@@ -321,11 +320,12 @@ void algo_dijkstra(pgraphe_t g, int r)
     }
   }
 
-  printf("Noeud\tDistance\n");
+  printf("Noeud\tDistance\tPère\n");
   p = g;
   while (p != NULL)
   {
-    printf("%d\t%d\t\n", p->label, p->distance);
+    if (p->pere != NULL)
+    printf("%d\t%d \t\t%d\n", p->label, p->distance, p->pere->label);
     p = p->sommet_suivant;
   }
 
