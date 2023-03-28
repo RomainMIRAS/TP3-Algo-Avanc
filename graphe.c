@@ -173,12 +173,58 @@ int colorier_graphe (pgraphe_t g)
   return max_couleur ;
 }
 
-void afficher_graphe_largeur (pgraphe_t g, int r)
-{
-  /*
-    afficher les sommets du graphe avec un parcours en largeur
-  */
-  
+void afficher_graphe_largeur (pgraphe_t g, int r) {
+
+  init_couleur_sommet (g);
+
+  pfile_t file = creer_file();
+  psommet_t p = g;
+  parc_t a = p->liste_arcs;
+
+  int distance = 0;
+  int nbDistanceAct = 1;
+  int nbDistanceNext = 0;
+
+  while(a != NULL) {
+    nbDistanceNext++;
+    a = a->arc_suivant;
+  }
+
+  enfiler(file, p);
+
+  p->couleur = 1;
+
+  printf("\n Distance 0 : ");
+
+  while(!file_vide(file)) {
+    p = defiler(file);
+
+    printf(" %d ", p->label);
+    
+    nbDistanceAct--;
+
+    if (nbDistanceAct == 0) {
+      distance++;
+      nbDistanceAct = nbDistanceNext;
+      nbDistanceNext = 0;
+
+      printf("\n Distance %d : ", distance);
+    }
+
+    
+
+    a = p->liste_arcs;
+    while(a != NULL) {
+      nbDistanceNext++;
+      if (a->dest->couleur == 0) {
+        a->dest->couleur = 1;
+        enfiler(file, a->dest);
+      }
+      a = a->arc_suivant;
+    }
+    
+  }
+  printf("\n");
   return ;
 }
 

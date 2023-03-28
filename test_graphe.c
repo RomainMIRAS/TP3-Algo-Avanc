@@ -36,4 +36,8 @@ int main (int argc, char **argv)
   printf ("nombre chromatique graphe = %d\n", nc) ;
 
   ecrire_graphe_colorie (g) ;
+
+  printf ("\nParcours arbre largeur\n") ;
+
+  afficher_graphe_largeur(g, 0);
 }
