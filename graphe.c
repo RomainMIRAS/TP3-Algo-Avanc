@@ -201,18 +201,14 @@ void afficher_graphe_largeur (pgraphe_t g, int r) {
     p = defiler(file);
 
     printf(" %d ", p->label);
-    
-    nbDistanceAct--;
 
-    if (nbDistanceAct == 0) {
+    if (--nbDistanceAct == 0) {
       distance++;
       nbDistanceAct = nbDistanceNext;
       nbDistanceNext = 0;
 
       printf("\n Distance %d : ", distance);
     }
-
-    
 
     a = p->liste_arcs;
     while(a != NULL) {
@@ -277,6 +273,17 @@ void algo_dijkstra (pgraphe_t g, int r)
 
   return ;
 }
+
+void algo_dijkstra_remi (pgraphe_t g, int r)
+{
+  /*
+    algorithme de dijkstra
+    des variables ou des chanmps doivent etre ajoutees dans les structures.
+  */
+
+  return ;
+}
+
 
 
 
