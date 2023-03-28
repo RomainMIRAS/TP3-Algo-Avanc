@@ -36,4 +36,10 @@ int main (int argc, char **argv)
   printf ("nombre chromatique graphe = %d\n", nc) ;
 
   ecrire_graphe_colorie (g) ;
+
+  printf("--------------------\n");
+  printf("Test d'affichage parcours en profondeur\n");
+  printf("--------------------\n");
+
+  afficher_graphe_profondeur(g, 1);
 }

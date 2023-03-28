@@ -15,6 +15,7 @@
 #endif
 
 #include "file.h"
+#include "pile.h"
 
 
 psommet_t chercher_sommet (pgraphe_t g, int label)
@@ -183,13 +184,42 @@ void afficher_graphe_largeur (pgraphe_t g, int r)
 }
 
 
+// void afficher_graphe_profondeur__rec_worker (psommet_t g, int r,int debut, int fin, int* temps)
+// {
+
+//   g->couleur = 1; // Gris - En cours de traitement
+//   *temps++;
+
+
+//   return ;
+// }
+
 void afficher_graphe_profondeur (pgraphe_t g, int r)
 {
-  /*
-    afficher les sommets du graphe avec un parcours en profondeur
-  */
+  // Pour tout les noeuds du graphe, on met la couleur a 0
+  init_couleur_sommet (g);
+  ppile_t p = creer_pile();
+  psommet_t current = chercher_sommet(g,r);
+  empiler(p,g);
+  while (!pile_vide(p))
+  {
+    current = depiler(p);
+    printf("Noeud %d\n",current->label);
+
+    if(current->couleur != 2){
+      current->couleur = 2;
+      parc_t a = current->liste_arcs;
+      while (a != NULL){
+        psommet_t s = a->dest;
+        if (s->couleur == 0){
+          s->couleur = 1;
+          empiler(p,s);
+        }
+        a = a->arc_suivant;
+      }
+    }
+  }
   
-  return ;
 }
 
 void algo_dijkstra (pgraphe_t g, int r)
