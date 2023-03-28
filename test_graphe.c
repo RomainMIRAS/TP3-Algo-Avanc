@@ -40,7 +40,7 @@ int main (int argc, char **argv)
   printf("--------------------\n");
   printf("Test d'affichage parcours en largeur\n");
   printf("--------------------\n");
-  afficher_graphe_largeur(g, 0);
+  afficher_graphe_largeur(g, 3);
 
   printf("--------------------\n");
   printf("Test d'affichage parcours en profondeur\n");

@@ -179,7 +179,7 @@ void afficher_graphe_largeur (pgraphe_t g, int r) {
   init_couleur_sommet (g);
 
   pfile_t file = creer_file();
-  psommet_t p = g;
+  psommet_t p = chercher_sommet(g, r);
   parc_t a = p->liste_arcs;
 
   int distance = 0;
@@ -202,7 +202,9 @@ void afficher_graphe_largeur (pgraphe_t g, int r) {
 
     printf(" %d ", p->label);
 
-    if (--nbDistanceAct == 0) {
+    nbDistanceAct--;
+
+    if (nbDistanceAct == 0) {
       distance++;
       nbDistanceAct = nbDistanceNext;
       nbDistanceNext = 0;
@@ -212,8 +214,8 @@ void afficher_graphe_largeur (pgraphe_t g, int r) {
 
     a = p->liste_arcs;
     while(a != NULL) {
-      nbDistanceNext++;
       if (a->dest->couleur == 0) {
+        nbDistanceNext++;
         a->dest->couleur = 1;
         enfiler(file, a->dest);
       }
@@ -306,7 +308,6 @@ void algo_dijkstra (pgraphe_t g, int r)
 while (!file_vide(file))
   {
     u = defiler(file);
-    printf("Noeud %d\n",u->label);
 
     if(u->couleur != 2){
       u->couleur = 2;
@@ -322,7 +323,7 @@ while (!file_vide(file))
       }
     }
   }
-  printf("Noeud\tDistance\n");
+  printf("Noeud\tDistance (à 1)\n");
   p = g ;
   while(p != NULL) {
     printf("%d\t%d\t\n",p->label,p->distance);
