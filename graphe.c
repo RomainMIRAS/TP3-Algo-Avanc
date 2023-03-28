@@ -246,7 +246,7 @@ void afficher_graphe_profondeur (pgraphe_t g, int r)
   init_couleur_sommet (g);
   ppile_t p = creer_pile();
   psommet_t current = chercher_sommet(g,r);
-  empiler(p,g);
+  empiler(p,current);
   while (!pile_vide(p))
   {
     current = depiler(p);
@@ -268,14 +268,72 @@ void afficher_graphe_profondeur (pgraphe_t g, int r)
   
 }
 
-void algo_dijkstra (pgraphe_t g, int r)
+void relachement (psommet_t u, psommet_t v, int poids)
 {
   /*
-    algorithme de dijkstra
-    des variables ou des chanmps doivent etre ajoutees dans les structures.
+    relachement de l'arc (u,v) de poids poids
   */
-
+  if (v->distance > u->distance + poids)
+  {
+    v->distance = u->distance + poids;
+  }
   return ;
+}
+
+void init_sommet(pgraphe_t g){
+  psommet_t p = g ;
+
+  while (p != NULL)
+    {
+      p->couleur = 0 ; // couleur indefinie
+      p->distance = INT_MAX; // INFINI      
+      p = p->sommet_suivant ; // passer au sommet suivant dans le graphe
+    }
+  
+  return ;
+}
+
+void algo_dijkstra (pgraphe_t g, int r)
+{
+  init_sommet(g);
+  psommet_t p = chercher_sommet(g,r);
+  p->distance = 0;
+  pfile_t file = creer_file();
+  parc_t a = NULL;
+
+  enfiler(file,p);
+  
+
+  psommet_t u = NULL;
+  psommet_t v = NULL;
+
+while (!file_vide(file))
+  {
+    u = defiler(file);
+    printf("Noeud %d\n",u->label);
+
+    if(u->couleur != 2){
+      u->couleur = 2;
+      a = u->liste_arcs;
+      while (a != NULL){
+        v = a->dest;
+        if (v->couleur == 0){
+          v->couleur = 1;
+          enfiler(file,v);
+          relachement(u,v,a->poids);
+        }
+        a = a->arc_suivant;
+      }
+    }
+  }
+  printf("Noeud\tDistance\n");
+  p = g ;
+  while(p != NULL) {
+    printf("%d\t%d\t\n",p->label,p->distance);
+    p = p->sommet_suivant;
+  }
+
+ return ;
 }
 
 

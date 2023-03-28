@@ -37,12 +37,20 @@ int main (int argc, char **argv)
 
   ecrire_graphe_colorie (g) ;
 
-  printf ("\nParcours arbre largeur\n") ;
-
+  printf("--------------------\n");
+  printf("Test d'affichage parcours en largeur\n");
+  printf("--------------------\n");
   afficher_graphe_largeur(g, 0);
+
   printf("--------------------\n");
   printf("Test d'affichage parcours en profondeur\n");
   printf("--------------------\n");
 
   afficher_graphe_profondeur(g, 1);
+
+  printf("--------------------\n");
+  printf("Test d'affichage Dijkstra\n");
+  printf("--------------------\n");
+
+  algo_dijkstra(g, 1);
 }
