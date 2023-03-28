@@ -13,6 +13,7 @@ typedef struct s
   struct s   *sommet_suivant ; // sommet suivant dans le graphe
   int        couleur ; // couleur du sommet
   int        distance ; // distance du sommet a la racine
+  struct s   *pere ; // pere du sommet dans l arbre de recherche
 } sommet_t, *psommet_t ;
 
 /*
