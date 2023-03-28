@@ -1,8 +1,8 @@
 
 #define MAX_FILE_SIZE       32
 
-#ifndef __ABR_H__
-  #define __ABR_H__
+#ifndef __GRAPHE_H__
+  #define __GRAPHE_H__
   #include "graphe.h"
 #endif
 

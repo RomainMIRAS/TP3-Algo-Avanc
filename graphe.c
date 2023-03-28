@@ -9,8 +9,11 @@
 #include <stdlib.h>
 #include <limits.h>
 
-#include "graphe.h"
-#include "pile.h"
+#ifndef __GRAPHE_H__
+  #define __GRAPHE_H__
+  #include "graphe.h"
+#endif
+
 #include "file.h"
 
 
