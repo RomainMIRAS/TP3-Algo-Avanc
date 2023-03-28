@@ -40,4 +40,9 @@ int main (int argc, char **argv)
   printf ("\nParcours arbre largeur\n") ;
 
   afficher_graphe_largeur(g, 0);
+  printf("--------------------\n");
+  printf("Test d'affichage parcours en profondeur\n");
+  printf("--------------------\n");
+
+  afficher_graphe_profondeur(g, 1);
 }
