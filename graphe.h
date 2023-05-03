@@ -78,6 +78,8 @@ void detruire_chemin(chemin_t c);
 
 chemin_t ajouter_chemin(chemin_t c, int label);
 
+int est_dans_chemin(chemin_t c, int label);
+
 int elementaire (pgraphe_t g, chemin_t c);
 
 

@@ -444,3 +444,27 @@ chemin_t ajouter_chemin(chemin_t c, int label){
   }
   tmp->suivant = creer_chemin(label);
 }
+
+int est_dans_chemin(chemin_t c, int label){
+  while(c != NULL){
+    if(c->label == label){
+      return 1;
+    }
+    c = c->suivant;
+  }
+  return 0;
+}
+/**
+ * Un chemin élémentaire est un chemin ne passant pas deux fois par un même sommet,
+ * c’est à dire un chemin dont tous les sommets sont distincts.
+*/
+int elementaire (pgraphe_t g, chemin_t c){
+  chemin_t tmp = creer_chemin(c->label);
+  while(c->suivant != NULL){
+    if(est_dans_chemin(tmp, c->suivant->label)){
+      return 0;
+    }
+    tmp = ajouter_chemin(tmp, c->suivant->label);
+    c = c->suivant;
+  }
+}
