@@ -519,3 +519,49 @@ int graphe_eulerien (pgraphe_t g){
   }
   return 0;
 }
+
+int distance (pgraphe_t g, int x, int y){
+  psommet_t p = g;
+  while(p != NULL){
+    if(p->label == x){
+      parc_t a = p->liste_arcs;
+      while(a != NULL){
+        if(a->dest->label == y){
+          return a->poids;
+        }
+        a = a->arc_suivant;
+      }
+    }
+    p = p->sommet_suivant;
+  }
+  return -1;
+}
+
+
+int excentricite (pgraphe_t g, int x){
+  int max = 0;
+  psommet_t p = g;
+  while(p != NULL){
+    if(p->label != x){
+      int d = distance(g, x, p->label);
+      if(d > max){
+        max = d;
+      }
+    }
+    p = p->sommet_suivant;
+  }
+  return max;
+}
+
+int diametre (pgraphe_t g){
+  int max = 0;
+  psommet_t p = g;
+  while(p != NULL){
+    int e = excentricite(g, p->label);
+    if(e > max){
+      max = e;
+    }
+    p = p->sommet_suivant;
+  }
+  return max;
+}

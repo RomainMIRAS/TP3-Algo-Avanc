@@ -86,5 +86,8 @@ int eulerien (pgraphe_t g, chemin_t c);
 
 int graphe_eulerien (pgraphe_t g);
 
+int distance (pgraphe_t g, int x, int y);
 
+int excentricite (pgraphe_t g, int x);
 
+int diametre (pgraphe_t g);
