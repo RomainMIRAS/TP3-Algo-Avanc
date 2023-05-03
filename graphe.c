@@ -501,3 +501,21 @@ int eulerien (pgraphe_t g, chemin_t c){
   }
   return 0;
 }
+
+/**
+ * Un graphe est dit Eulérien si il existe au moins un chemin qui soit Eulérien.
+ * renvoie 1 si le graphe est eulérien, 0 sinon
+*/
+int graphe_eulerien (pgraphe_t g){
+  psommet_t p = g;
+  chemin_t c;
+  while(p != NULL){
+    c = creer_chemin(p->label);
+    if(eulerien(g, c)){
+      return 1;
+    }
+    p = p->sommet_suivant;
+    ajouter_chemin(c, p->label);
+  }
+  return 0;
+}

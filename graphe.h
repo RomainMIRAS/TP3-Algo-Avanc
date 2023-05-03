@@ -84,5 +84,7 @@ int elementaire (pgraphe_t g, chemin_t c);
 
 int eulerien (pgraphe_t g, chemin_t c);
 
+int graphe_eulerien (pgraphe_t g);
+
 
 

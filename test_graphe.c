@@ -53,4 +53,50 @@ int main (int argc, char **argv)
   printf("--------------------\n");
 
   algo_dijkstra(g, 1);
+
+  printf("--------------------\n");
+  printf("Test chemin elementaire\n");
+  printf("--------------------\n");
+
+  chemin_t c = creer_chemin(g->label);
+
+  printf("Chemin elementaire ? %d\n", elementaire(g, c));
+
+  c = ajouter_chemin(c, g->sommet_suivant->label);
+
+  printf("Chemin elementaire ? %d\n", elementaire(g, c));
+
+  c = ajouter_chemin(c, g->label);
+
+  printf("Chemin elementaire ? %d\n", elementaire(g, c));
+
+  detruire_chemin(c);
+
+  printf("--------------------\n");
+  printf("Test chemin eulerien\n");
+  printf("--------------------\n");
+
+  c = creer_chemin(g->label);
+
+  printf("Chemin eulerien ? %d\n", eulerien(g, c));
+
+  parc_t a = g->liste_arcs;
+
+  while(a != NULL)
+  {
+    c = ajouter_chemin(c, a->dest->label);
+    a = a->arc_suivant;
+  }
+
+  printf("Chemin eulerien ? %d\n", eulerien(g, c));
+
+  detruire_chemin(c);
+
+  printf("--------------------\n");
+  printf("Test graphe  eurelerien\n");
+  printf("--------------------\n");
+
+  printf("Graphe eulerien ? %d\n", graphe_eulerien(g));
+
+  return 0 ;
 }
