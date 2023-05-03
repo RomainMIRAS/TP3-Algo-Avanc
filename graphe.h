@@ -30,6 +30,16 @@ typedef struct a {
   
 } arc_t, *parc_t ;
 
+
+struct chemin
+{
+  int label;
+  struct chemin * suivant;
+};
+
+typedef struct chemin * chemin_t;
+
+
 /*
   pgraphe_t: pointeur vers le premier sommet d'un graphe
 */
@@ -59,3 +69,5 @@ void afficher_graphe_profondeur (pgraphe_t g, int r) ;
 void afficher_graphe_largeur (pgraphe_t g, int r) ;
 
 void algo_dijkstra (pgraphe_t g, int r) ;
+
+int elementaire (pgraphe_t g, chemin_t c) ;
