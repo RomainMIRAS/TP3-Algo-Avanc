@@ -82,4 +82,7 @@ int est_dans_chemin(chemin_t c, int label);
 
 int elementaire (pgraphe_t g, chemin_t c);
 
+int eulerien (pgraphe_t g, chemin_t c);
+
+
 

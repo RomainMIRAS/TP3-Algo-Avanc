@@ -468,3 +468,36 @@ int elementaire (pgraphe_t g, chemin_t c){
     c = c->suivant;
   }
 }
+
+int getNbArcs(pgraphe_t g){
+  int nb_arcs = 0;
+  psommet_t p = g;
+  parc_t a;
+  while(p != NULL){
+    a = p->liste_arcs;
+    while(a != NULL){
+      nb_arcs++;
+      a = a->arc_suivant;
+    }
+    p = p->sommet_suivant;
+  }
+  return nb_arcs;
+}
+
+/**
+ * Un chemin est dit Eulérien si tous les arcs du graphe sont utilisés dans le chemin.
+*/
+int eulerien (pgraphe_t g, chemin_t c){
+  int nb_arcs = 0;
+  while(c->suivant != NULL){
+    if(!est_dans_chemin(c->suivant, c->label)){
+      return 0;
+    }
+    nb_arcs++;
+    c = c->suivant;
+  }
+  if(nb_arcs == getNbArcs(g)){
+    return 1;
+  }
+  return 0;
+}
