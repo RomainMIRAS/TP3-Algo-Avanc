@@ -408,3 +408,39 @@ int regulier(pgraphe_t g)
 /*
   placer les fonctions de l'examen 2017 juste apres
 */
+
+
+// ======================================================================
+
+chemin_t creer_chemin(int label){
+  chemin_t c = (chemin_t)malloc(sizeof(struct chemin));
+  c->label = label;
+  c->suivant = NULL;
+  return c;
+}
+
+void afficher_chemin(chemin_t c){
+  printf("Chemin : ");
+  while(c != NULL){
+    printf("%d ", c->label);
+    c = c->suivant;
+  }
+  printf("\n");
+}
+
+void detruire_chemin(chemin_t c){
+  chemin_t tmp;
+  while(c != NULL){
+    tmp = c;
+    c = c->suivant;
+    free(tmp);
+  }
+}
+
+chemin_t ajouter_chemin(chemin_t c, int label){
+  chemin_t tmp = c;
+  while(tmp->suivant != NULL){
+    tmp = tmp->suivant;
+  }
+  tmp->suivant = creer_chemin(label);
+}
